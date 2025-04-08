@@ -49,6 +49,10 @@ const Container = ({ children, section }: ContainerProps) => {
               {section}
               <div className="">{children}</div>
             </div>
+            <footer className="text-center text-xs text-gray-500 dark:text-gray-400 mt-10 pb-4">
+            © {new Date().getFullYear()} Coded by Md Ariful Islam and Safwan Azman
+          </footer>
+
           </div>
         </div>
       </div>
