@@ -46,42 +46,42 @@ const Navbar = ({}) => {
       href: "/",
       icon: <Search className="w-5 h-5" />,
     },
-    {
-      title: `${t("HeaderSection.donate")}`,
-      href: `https://donate.infakpalestin.com/order/form/emergency4gaza-ka`,
-      icon: <div className="text-xl">🇵🇸</div>,
-      newTab: true,
-    },
-    {
-      title: `${t("HeaderSection.reference")}`,
-      icon: <BookCopy className="w-5 h-5" />,
-      dropdown: [
-        {
-          title: "boycott.thewitness.news",
-          href: "https://boycott.thewitness.news/",
-        },
-        {
-          title: "nurzariniismail.com",
-          href: "https://www.nurzariniismail.com/2023/11/senarai-produk-makanan-barangan-israel-untuk-boikot.html",
-        },
-        {
-          title: "mayniaga.com",
-          href: "https://www.mayniaga.com/companies-supporting-israel/",
-        },
-        {
-          title: "shafiqolbu.wordpress.com",
-          href: "https://shafiqolbu.wordpress.com/2014/08/09/apakah-senarai-produk-barangan-israelamerika-yang-perlu-di-boikot/",
-        },
-        {
-          title: "nextstepmalaysia.com",
-          href: "https://www.nextstepmalaysia.com/israel-cukup-takut-dengan-tindakan-ini-senarai-produk-israel-wajib-diboikot/",
-        },
-        {
-          title: "theblushinggiraffe.com",
-          href: "https://www.theblushinggiraffe.com/p/ethical-beauty.html",
-        },
-      ],
-    },
+    // {
+    //   title: `${t("HeaderSection.donate")}`,
+    //   href: `https://donate.infakpalestin.com/order/form/emergency4gaza-ka`,
+    //   icon: <div className="text-xl">🇵🇸</div>,
+    //   newTab: true,
+    // },
+    // {
+    //   title: `${t("HeaderSection.reference")}`,
+    //   icon: <BookCopy className="w-5 h-5" />,
+    //   dropdown: [
+    //     {
+    //       title: "boycott.thewitness.news",
+    //       href: "https://boycott.thewitness.news/",
+    //     },
+    //     {
+    //       title: "nurzariniismail.com",
+    //       href: "https://www.nurzariniismail.com/2023/11/senarai-produk-makanan-barangan-israel-untuk-boikot.html",
+    //     },
+    //     {
+    //       title: "mayniaga.com",
+    //       href: "https://www.mayniaga.com/companies-supporting-israel/",
+    //     },
+    //     {
+    //       title: "shafiqolbu.wordpress.com",
+    //       href: "https://shafiqolbu.wordpress.com/2014/08/09/apakah-senarai-produk-barangan-israelamerika-yang-perlu-di-boikot/",
+    //     },
+    //     {
+    //       title: "nextstepmalaysia.com",
+    //       href: "https://www.nextstepmalaysia.com/israel-cukup-takut-dengan-tindakan-ini-senarai-produk-israel-wajib-diboikot/",
+    //     },
+    //     {
+    //       title: "theblushinggiraffe.com",
+    //       href: "https://www.theblushinggiraffe.com/p/ethical-beauty.html",
+    //     },
+    //   ],
+    // },
   ];
 
   return (
@@ -163,7 +163,7 @@ const Navbar = ({}) => {
                     locale="my"
                   >
                     <Globe className="w-5 h-5" />
-                    <p>Malay</p>
+                    <p>Bangla</p>
                   </Link>
                 </div>
               )}
@@ -278,7 +278,7 @@ const Navbar = ({}) => {
                         locale="my"
                       >
                         <Globe className="w-5 h-5" />
-                        <p>Malay</p>
+                        <p>Bangla</p>
                       </Link>
                     </div>
                   )}

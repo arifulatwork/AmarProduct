@@ -3,7 +3,7 @@
 import React, { ReactNode } from "react";
 import Navbar from "@/components/layouts/navbar";
 import Image from "next/image";
-import MainBg from "../../../public/MainBg.webp";
+import MainBg from "../../../public/MainBg.png";
 import { useTranslations } from "next-intl";
 import { useMobileNavbar } from "@/context/MobileNavbarContext";
 import { mainFont } from "@/utils/font";

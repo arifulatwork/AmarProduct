@@ -15,7 +15,7 @@ const Logo = ({}) =>{
                 priority
             />
             <p className="text-xs md:text-sm font-semibold">
-            {t("LogoSection.title")} <span>Israel</span>
+            {t("LogoSection.title")} <span></span>
             </p>
         </Link>
     )
