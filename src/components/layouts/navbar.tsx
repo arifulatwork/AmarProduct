@@ -6,9 +6,9 @@ import {
   X,
   Globe,
   Search,
-  BookCopy,
   ExternalLink,
   LayoutDashboard,
+  HeartHandshake,
 } from "lucide-react";
 import { useLocale } from "next-intl";
 import { ThemeSwitcher } from "@/components/molecules/theme-switcher";
@@ -23,6 +23,14 @@ import {
 import { useMobileNavbar } from "@/context/MobileNavbarContext";
 import { Link, usePathname } from "../../navigation";
 import { useTranslations } from "next-intl";
+import { UrlObject } from "url";
+
+type NavItem = {
+  title: string;
+  href?: string | UrlObject;
+  icon: React.ReactNode;
+  hoverText?: string;
+};
 
 const Navbar = ({}) => {
   const { showNavbar, setShowNavbar } = useMobileNavbar();
@@ -40,48 +48,17 @@ const Navbar = ({}) => {
     return newPath;
   };
 
-  const navItem = [
+  const navItem: NavItem[] = [
     {
       title: `${t("HeaderSection.search")}`,
       href: "/",
       icon: <Search className="w-5 h-5" />,
     },
-    // {
-    //   title: `${t("HeaderSection.donate")}`,
-    //   href: `https://donate.infakpalestin.com/order/form/emergency4gaza-ka`,
-    //   icon: <div className="text-xl">🇵🇸</div>,
-    //   newTab: true,
-    // },
-    // {
-    //   title: `${t("HeaderSection.reference")}`,
-    //   icon: <BookCopy className="w-5 h-5" />,
-    //   dropdown: [
-    //     {
-    //       title: "boycott.thewitness.news",
-    //       href: "https://boycott.thewitness.news/",
-    //     },
-    //     {
-    //       title: "nurzariniismail.com",
-    //       href: "https://www.nurzariniismail.com/2023/11/senarai-produk-makanan-barangan-israel-untuk-boikot.html",
-    //     },
-    //     {
-    //       title: "mayniaga.com",
-    //       href: "https://www.mayniaga.com/companies-supporting-israel/",
-    //     },
-    //     {
-    //       title: "shafiqolbu.wordpress.com",
-    //       href: "https://shafiqolbu.wordpress.com/2014/08/09/apakah-senarai-produk-barangan-israelamerika-yang-perlu-di-boikot/",
-    //     },
-    //     {
-    //       title: "nextstepmalaysia.com",
-    //       href: "https://www.nextstepmalaysia.com/israel-cukup-takut-dengan-tindakan-ini-senarai-produk-israel-wajib-diboikot/",
-    //     },
-    //     {
-    //       title: "theblushinggiraffe.com",
-    //       href: "https://www.theblushinggiraffe.com/p/ethical-beauty.html",
-    //     },
-    //   ],
-    // },
+    {
+      title: `${t("HeaderSection.donate")}`,
+      icon: <HeartHandshake className="w-5 h-5" />,
+      hoverText: "এখনো কোনো ভালো মাধ্যম পাইনি, তবে পেলেই জানাবো।",
+    },
   ];
 
   return (
@@ -93,14 +70,11 @@ const Navbar = ({}) => {
             <Logo />
             <div className="flex items-center">
               {navItem.map((item, index) => (
-                <div key={index}>
-                  {!item.dropdown ? (
+                <div key={index} className="relative group">
+                  {item.href ? (
                     <Link
-                      {...(item.newTab
-                        ? { target: "_blank", rel: "noopener noreferrer" }
-                        : {})}
                       href={item.href}
-                      className={`text-sm px-3 font-semibold w-full flex items-center space-x-2 hover:scale-110  transition duration-300 ease-in-out ${
+                      className={`text-sm px-3 font-semibold w-full flex items-center space-x-2 hover:scale-110 transition duration-300 ease-in-out ${
                         pathname === item.href ? "text-red-500" : ""
                       }`}
                     >
@@ -108,36 +82,15 @@ const Navbar = ({}) => {
                       <p>{item.title}</p>
                     </Link>
                   ) : (
-                    <NavigationMenu>
-                      <NavigationMenuList>
-                        <NavigationMenuItem>
-                          <NavigationMenuTrigger>
-                            <div className="text-sm font-semibold w-full flex items-center space-x-2 cursor-pointer hover:scale-110 transition duration-300 ease-in-out">
-                              {item.icon}
-                              <p>{item.title}</p>
-                            </div>
-                          </NavigationMenuTrigger>
-                          <NavigationMenuContent>
-                            {item.dropdown.map(
-                              (dropdownItem, dropdownIndex) => (
-                                <NavigationMenuLink key={dropdownIndex}>
-                                  <div className="px-6 py-2 hover:bg-red-50 hover:text-red-500 ">
-                                    <Link
-                                      className="flex items-center space-x-2"
-                                      href={dropdownItem.href}
-                                      target="_blank"
-                                    >
-                                      <ExternalLink className="w-4 h-4" />
-                                      <p>{dropdownItem.title}</p>
-                                    </Link>
-                                  </div>
-                                </NavigationMenuLink>
-                              )
-                            )}
-                          </NavigationMenuContent>
-                        </NavigationMenuItem>
-                      </NavigationMenuList>
-                    </NavigationMenu>
+                    <div className="text-sm px-3 font-semibold w-full flex items-center space-x-2 hover:scale-110 transition duration-300 ease-in-out cursor-pointer">
+                      {item.icon}
+                      <p>{item.title}</p>
+                      {item.hoverText && (
+                        <div className="absolute hidden group-hover:block top-full left-0 mt-2 bg-white dark:bg-gray-800 shadow-lg rounded-md p-2 text-sm whitespace-nowrap z-50">
+                          {item.hoverText}
+                        </div>
+                      )}
+                    </div>
                   )}
                 </div>
               ))}
@@ -148,7 +101,7 @@ const Navbar = ({}) => {
                 <div onClick={() => setShowNavbar(false)}>
                   <Link
                     href={generateLocaleUrl()}
-                    className={`text-sm font-semibold px-5 py-5 w-full flex items-center space-x-2  hover:scale-110 transition duration-300 ease-in-out `}
+                    className={`text-sm font-semibold px-5 py-5 w-full flex items-center space-x-2 hover:scale-110 transition duration-300 ease-in-out`}
                     locale="en"
                   >
                     <Globe className="w-5 h-5" />
@@ -159,7 +112,7 @@ const Navbar = ({}) => {
                 <div onClick={() => setShowNavbar(false)}>
                   <Link
                     href={generateLocaleUrl()}
-                    className={`text-sm font-semibold px-5 py-5 w-full flex items-center space-x-2  hover:scale-110 transition duration-300 ease-in-out`}
+                    className={`text-sm font-semibold px-5 py-5 w-full flex items-center space-x-2 hover:scale-110 transition duration-300 ease-in-out`}
                     locale="my"
                   >
                     <Globe className="w-5 h-5" />
@@ -175,7 +128,7 @@ const Navbar = ({}) => {
       {/* mobile view */}
       <div className="block lg:hidden fixed w-full z-50">
         <nav className="w-full shadow-md">
-          <div className="flex justify-between items-center bg-white/80 backdrop-blur-xl w-full px-2  dark:bg-gray-900/80">
+          <div className="flex justify-between items-center bg-white/80 backdrop-blur-xl w-full px-2 dark:bg-gray-900/80">
             <Logo />
             <div className="flex items-center space-x-5">
               <ThemeSwitcher />
@@ -203,51 +156,30 @@ const Navbar = ({}) => {
               <div>
                 {navItem.map((item, index) => (
                   <div className="border-b px-5 py-5" key={index}>
-                    {!item.dropdown ? (
+                    {item.href ? (
                       <Link
                         onClick={() => setShowNavbar(false)}
                         href={item.href}
-                        {...(item.newTab
-                          ? { target: "_blank", rel: "noopener noreferrer" }
-                          : {})}
-                        className={`text-sm font-semibold  w-full flex items-center space-x-2 
-                                        ${
-                                          pathname === item.href
-                                            ? "text-red-500 font-semibold"
-                                            : ""
-                                        }`}
+                        className={`text-sm font-semibold w-full flex items-center space-x-2 ${
+                          pathname === item.href
+                            ? "text-red-500 font-semibold"
+                            : ""
+                        }`}
                       >
                         {item.icon}
                         <p>{item.title}</p>
                       </Link>
                     ) : (
                       <div>
-                        <div>
-                          <button
-                            onClick={() => setOpenDropdown(!openDropdown)}
-                            className="text-sm font-semibold  w-full flex items-center space-x-2"
-                          >
-                            {item.icon}
-                            <p>{item.title}</p>
-                          </button>
+                        <div className="text-sm font-semibold w-full flex items-center space-x-2">
+                          {item.icon}
+                          <p>{item.title}</p>
                         </div>
-                        {openDropdown ? (
-                          <div className="mt-2 bg-gray-50 dark:bg-gray-900 px-4 py-5 rounded-lg">
-                            {item.dropdown.map(
-                              (dropdownItem, dropdownIndex) => (
-                                <Link
-                                  key={dropdownIndex}
-                                  className="flex items-center space-x-2 pb-4"
-                                  href={dropdownItem.href}
-                                  target="_blank"
-                                >
-                                  <ExternalLink className="w-4 h-4" />
-                                  <p>{dropdownItem.title}</p>
-                                </Link>
-                              )
-                            )}
+                        {item.hoverText && (
+                          <div className="mt-2 text-sm text-gray-600 dark:text-gray-400">
+                            {item.hoverText}
                           </div>
-                        ) : null}
+                        )}
                       </div>
                     )}
                   </div>
@@ -256,7 +188,7 @@ const Navbar = ({}) => {
                   {locale !== "en" ? (
                     <div
                       onClick={() => setShowNavbar(false)}
-                      className="border-b "
+                      className="border-b"
                     >
                       <Link
                         href={generateLocaleUrl()}
@@ -270,7 +202,7 @@ const Navbar = ({}) => {
                   ) : (
                     <div
                       onClick={() => setShowNavbar(false)}
-                      className="border-b "
+                      className="border-b"
                     >
                       <Link
                         href={generateLocaleUrl()}
