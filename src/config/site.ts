@@ -1,7 +1,7 @@
 import { SiteConfig } from "@/types";
 
 export const siteConfig: SiteConfig = {
-    title: `Boycott Israel`,
+    title: `Building a Better Bangladesh,Together`,
     description:`
         Stand with the Palestinians in their struggle for freedom, justice, and equality.
     `,
