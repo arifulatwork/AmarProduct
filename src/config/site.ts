@@ -6,10 +6,10 @@ export const siteConfig: SiteConfig = {
         Stand with the Palestinians in their struggle for freedom, justice, and equality.
     `,
     url: `https://www.boikotisrael.com/`,
-    ogImage: `https://ucarecdn.com/ed78f56d-e797-46d6-99d7-c68ea85776a6/og.png`,
-    name:'SafwanAzman',
+    ogImage: `https://outspoken.newagebd.com/files/img/202405/4f50ce9068e5f485510e191f2e5b3ad9.jpg`,
+    name:'SafwanAzman and Ariful',
     links: {
-        github: 'https://github.com/safwanAzman',
+        github: 'https://github.com',
     },
     keywords: [
         "Boikot israel",
